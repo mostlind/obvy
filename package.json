@@ -1,0 +1,14 @@
+{
+  "name": "obvy",
+  "version": "1.0.0",
+  "description": "A simple observable implementation using ES6 Proxy",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava tests"
+  },
+  "author": "Matt",
+  "license": "ISC",
+  "devDependencies": {
+    "ava": "^0.22.0"
+  }
+}
