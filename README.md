@@ -41,3 +41,18 @@ obs.b.c = "What's up" // >>> What's up, world!
 
 s.unsub()
 ```
+
+Pass `this` context to subscription function
+
+```javascript
+let obj = {
+    z: 2,
+    out(state) { console.log([this.z, state.a]) }
+}
+
+const thisSub = obs.sub(obj.out, obj)
+
+state.a = 20 // >>> [2, 20]
+
+thisSub.unsub()
+```

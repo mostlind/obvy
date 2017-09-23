@@ -13,13 +13,13 @@ test(t => {
 
 // Obvy call with object returns object with same properties
 test(t => {
-  let o = obvy({ a: 1 });
-  t.deepEqual(o, { a: 1 });
+  let o = obvy({ a: 0 });
+  t.deepEqual(o, { a: 0 });
 });
 
 // subscribtion is called
 test(t => {
-  let o = obvy({ a: 1 });
+  let o = obvy({ a: 0 });
   let b;
 
   o.sub(s => (b = s.a));
@@ -31,7 +31,7 @@ test(t => {
 
 // Subscription is no longer called after unsubscribe
 test(t => {
-  let o = obvy({ a: 1 });
+  let o = obvy({ a: 0 });
   let b;
 
   let sub = o.sub(s => (b = s.a));
@@ -47,7 +47,7 @@ test(t => {
 
 // Subscription is called for nested objects
 test(t => {
-  let o = obvy({ a: { b: 1 } });
+  let o = obvy({ a: { b: 0 } });
   let c;
 
   o.sub(s => (c = s.a.b));
@@ -57,9 +57,9 @@ test(t => {
   t.is(c, 1);
 });
 
-// Handle subscriptions
+// Handle multiple subscriptions
 test(t => {
-  let o = obvy({ a: 1 });
+  let o = obvy({ a: 0 });
   let b;
   let c;
 
@@ -71,3 +71,18 @@ test(t => {
   t.is(b, 1);
   t.is(c, 1);
 });
+
+// Subscription callback context argument binds properly
+test(t => {
+  let o = obvy({a: 0})
+  let obj = {
+    z: 2,
+    setZ (s) { this.z = s.a }
+  }
+
+  o.sub(obj.setZ, obj)
+
+  o.a = 1
+
+  t.is(obj.z, 1)
+})

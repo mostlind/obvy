@@ -1,8 +1,6 @@
 const callEach = (fns, arg) =>
   fns.forEach(({ fn, ctxt }) => fn.call(ctxt || null, arg));
 
-const removeItem = (arr, item) => arr.filter(i => i !== item);
-
 function createObservable(obj, observers = [], topLevelObj = obj) {
   const convertIfObject = value =>
     typeof value === "object" && value !== null && !Array.isArray(value)
@@ -33,5 +31,5 @@ function createObservable(obj, observers = [], topLevelObj = obj) {
   });
 }
 
-//module.exports = (obj = {}) => createObservable(obj);
-export default (obj = {}) => createObservable(obj);
+module.exports = (obj = {}) => createObservable(obj);
+//export default (obj = {}) => createObservable(obj);
