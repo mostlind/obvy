@@ -26,9 +26,9 @@ obs.a = 50 // *no output*
 ```
 Arrays aren't observable. Replace, don't mutate.
 ```javascript
-const newSubscription = obs.sub((state) => console.log(state.d + " hi"))
+const newSubscription = obs.sub((state) => console.log([...state.d, 'Neat!']))
 
-obs.d = obs.d.map(n => n * 2) // >>> [2, 4, 6] hi
+obs.d = obs.d.map(n => n * 2) // >>> [2, 4, 6, 'Neat!']
 
 newSubscription.unsub()
 ```
