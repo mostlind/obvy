@@ -31,5 +31,4 @@ function createObservable(obj, observers = [], topLevelObj = obj) {
   });
 }
 
-module.exports = (obj = {}) => createObservable(obj);
-//export default (obj = {}) => createObservable(obj);
+export default (obj = {}) => createObservable(obj);

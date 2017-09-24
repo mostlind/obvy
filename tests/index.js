@@ -1,5 +1,5 @@
-const obvy = require("../index");
-const { test } = require("ava");
+import obvy from "../index";
+import test from "ava";
 
 // Obvy call with no arguments returns empty observable
 test(t => {
@@ -74,15 +74,17 @@ test(t => {
 
 // Subscription callback context argument binds properly
 test(t => {
-  let o = obvy({a: 0})
+  let o = obvy({ a: 0 });
   let obj = {
     z: 2,
-    setZ (s) { this.z = s.a }
-  }
+    setZ(s) {
+      this.z = s.a;
+    }
+  };
 
-  o.sub(obj.setZ, obj)
+  o.sub(obj.setZ, obj);
 
-  o.a = 1
+  o.a = 1;
 
-  t.is(obj.z, 1)
-})
+  t.is(obj.z, 1);
+});
